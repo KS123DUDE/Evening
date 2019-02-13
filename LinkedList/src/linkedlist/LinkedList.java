@@ -1,143 +1,116 @@
 
-package linkedlist;
 import java.util.*;
 class Node
 {
-    int data;
-    Node next;
-    Node(int data)
-    {
-        this.data=data;
-        this.next=null;
-    }
+	int data;
+	Node next=null;
 }
-class LinkedList {
-    public void display(Node head)
-    {
-        while(head!=null)
-        {
-            System.out.println(head.data);
-            head=head.next;
-        }
-    }
-    public Node insatbeg(Node head)
-    {
-        System.out.println("Enter elements of linked list to insert at beginning");
-        Scanner o=new Scanner(System.in);
-        int data=o.nextInt();
-        Node n=new Node(data);
-        if(head==null)
-        {
-            head=n;
-        }
-        else{
-            n.next=head;
-            head=n;
-        }
-        return head;
-    }
-    public void insatend(Node head)
-    {
-        System.out.println("Enter elements of linked list to insert at end");
-        Scanner o=new Scanner(System.in);
-        int data=o.nextInt();
-        Node n=new Node(data);
-        if(head==null)
-        {
-            head=n;
-        }
-        else{
-            while(head.next!=null)
-            {
-                head=head.next;
-            }
-            head.next=n;
-        }
-    }
-    public void insatmid(Node head)
-    {
-        System.out.println("Enter elements of linked list to insert at mid");
-        Scanner o=new Scanner(System.in);
-        int data=o.nextInt();
-        System.out.println("Enter the position");
-        int pos=o.nextInt();
-        int c=1;
-        Node n=new Node(data);
-        if(head==null)
-        {
-            head=n;
-        }
-        else{
-            while(head.next!=null)
-            {if(c==pos)
-            {
-                break;
-            }
-                head=head.next;
-                c++;
-            }
-            n.next=head.next;
-            head.next=n;
-        }
-    }
+class LinkedList{
+Node head;
+public void insert(int d)
+{
+	Node node=new Node();
+	node.data=d;
+	if(head==null)
+	{
+		head=node;
+	}
+	else
+	{
+		Node n=head;
+		while(n.next!=null)
+		{
+			n=n.next;
+		}
+		n.next=node;
+	}
+}
+public void i(int dx)
+{
+	Node node=new Node();
+	node.data=dx;
+	node.next=head;
+	head=node;
+}
 
-    void deleteNode(int index)
-    {
+public void ias(int i,int x)
+{
+	Node node=new Node();
+	node.data=x;
+	Node n=head;
+	for(int ix=0;ix<i-1;ix++)
+	{
+		n=n.next;
+	}
+	node.next=n.next;
+	n.next=node;
+}
+public void deleteNode(int ix) 
+    { 
+         
+        if (head == null) 
+            return; 
+        Node temp = head; 
+       if (ix == 0) 
+        { 
+            head = temp.next;   // Change head 
+            return; 
+        } 
+    for (int i=0; temp!=null && i<ix-1; i++) 
+            temp = temp.next; 
+     if (temp == null || temp.next == null) 
+            return; 
+        Node next = temp.next.next; 
+        temp.next = next;  // Unlink the deleted node from list 
+    }
+     public void reverse() { 
+        Node p1 = null; 
+        Node p2 = head; 
+        Node p3 = null; 
+        while (p2 != null) { 
+            p3 = p2.next; 
+            p2.next = p1; 
+            p1 = p2; 
+            p2 = p3; 
+        } 
+        head = p1; 
         
-        if (head == null)
-            return;
-        if (index == 0)
-        {
-            Node temp = head;
-            head = temp.next;
-            temp=null;
-            return;
-        }
-       else
-        {
-         Node temp=head;
-        for (int i=0; temp!=null && i<index-1; i++)
-            temp = temp.next;
+    } 
+public void display()
+{
+	Node n=head;
+	while(n!=null)
+	{
+		System.out.print(n.data+" ");
+		n=n.next;
+	}
+}
+public static void main(String[] args) {
+ 	LinkedList a=new LinedList();
+ 	Scanner s=new Scanner(System.in);
+ 	System.out.println("enter value");
+ 	int x=s.nextInt();
+ 	while(x>0)
+ 	{
+ 		a.insert(x);
+ 		System.out.println("enter value");
+ 		x=s.nextInt();
+ 	}
+ 	a.display();
+ 	a.i(45);
+ 	System.out.println();
+ 	a.display();
+ 	a.ias(2,55);
 
-        
-        if (temp == null || temp.next == null)
-            return;
-          Node next = temp.next.next;
-          temp.next = next;  
-    }
+ 	System.out.println();
+ 	a.display();
+ 	a.deleteNode(2);
 
-    }
-    
-    public static void main(String[] args) {
-        LinkedList m=new LinkedList();
-        int data,i;
-        Scanner o=new Scanner(System.in);
-        Node head=null;
-        System.out.println("Enter elements of linked list");
-        data=o.nextInt();
-        while(data!=-1)
-        {
-            Node n=new Node(data);
-            if(head==null)
-            {
-                head=n;
-            }
-            else
-            {
-                Node p=head;
-                while(p.next!=null)
-                {
-                    p=p.next;
-                }
-                p.next=n;
-            }
-            data=o.nextInt();
-        }
-        head=m.insatbeg(head);
-        m.insatend(head);
-        m.insatmid(head);
-        
-        m.display(head);
+ 	System.out.println();
+ 	a.display();
+ 	a.reverse();
 
-    }
+ 	System.out.println();
+ 	a.display();
+ } 
 }
